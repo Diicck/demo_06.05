@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<script>
+    let person = {
+        name:"张三",
+        age:19
+    }
+    // let p = {}
+    //
+    // Object.defineProperty(p,"name",{
+    //     // 可修改
+    //     configurable:true,
+    //     get(){
+    //     console.log("读取了person对象中的name")
+    //         return person.name
+    // },
+    //     set(value){
+    //         console.log("设置了person对象中的name")
+    //
+    //         person.name = value
+    //         console.log(value)
+    //     }
+    // })
+    //
+    // Object.defineProperty(p,"age",{
+    //     get(){
+    //         console.log("读取了person对象中的age")
+    //         return person.age
+    //     },
+    //     set(){
+    //         console.log("设置了person对象中的age")
+    //     }
+    // })
+
+    const p = new Proxy(person,{
+        get(target, key) {
+            console.log( "xxx"+"读取了"+key+"属性" )
+            return target[key];
+        },
+        set(target, p, newValue) {
+            console.log( "xxx"+"设置/修改了"+p+"属性" )
+            target[p] = newValue
+            return newValue
+        },
+        deleteProperty(target, key) {
+            console.log( "xxx"+"删除了"+key+"属性" )
+            return delete target[key]
+
+        }
+    })
+</script>
+</body>
+</html>
